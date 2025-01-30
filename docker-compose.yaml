@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    container_name: online_bank_auth
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./auth/.env
+    # volumes:
+    #   - ./auth:/application/:rw
+
+  users:
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    container_name: online_bank_users
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./users/.env
+    # volumes:
+    #   - ./users:/application/
+
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: online_bank_gateway
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./gateway/.env
+    # volumes:
+    #   - ./users:/application/
